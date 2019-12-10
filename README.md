@@ -1,2 +1,2 @@
-# pytex
+# PyTeX
 Be genius in LaTeX
