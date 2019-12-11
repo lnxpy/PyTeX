@@ -1,5 +1,5 @@
-<<<<<<< HEAD
 from distutils.core import setup
+
 setup(
     name='pytex-latex',         # How you named your package folder (MyLib)
     packages=['pytex-latex'],   # Chose the same as "name"
@@ -29,14 +29,13 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
     ],
-=======
 import setuptools
 
 with open("README.md", "r") as fh:
-    long_description = fh.read()
+    long_description=fh.read()
 
 setuptools.setup(
-    name="pytex-lnxpy", # Replace with your own username
+    name="pytex-lnxpy",  # Replace with your own username
     version="1.0",
     author="Alireza Yahyapour",
     author_email="lnxpylnxpy@gmail.com",
@@ -51,5 +50,4 @@ setuptools.setup(
         "Operating System :: Linux",
     ],
     python_requires='>=3.6',
->>>>>>> b0a5f8903a3b00e82ebafdaf43603e986bafa921
 )
