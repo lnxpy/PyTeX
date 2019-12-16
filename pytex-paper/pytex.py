@@ -39,9 +39,7 @@ PyTeX has been released from PyPi and licensed by `GPL-3`
 
 Repo ~> <https://github.com/lnxpy/pytex>
 ------------------------------
-Document ~> <https://github.com/lnxpy/pytex/*************>
-------------------------------
-Website ~> <http://lnxpy.unaux.com>
+Gist ~> <https://gist.github.com/lnxpy/29234003d256ae9da4286a442753331c>
 ------------------------------
 
 Made with 💙 on 2019 by Alireza Yahyapour
