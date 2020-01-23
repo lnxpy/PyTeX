@@ -1,1 +1,0 @@
-from pytex import LaTeX

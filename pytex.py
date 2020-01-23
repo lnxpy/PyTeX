@@ -2,69 +2,56 @@
 # -*- coding: utf-8 -*-
 
 r"""
-PyTeX is a simple way of paper writing using LaTeX.
-You can write your papers in a python script and make it ready to be compiled in various compilers of LaTeX.
+PyTeX is a simple way of paper writing using LaTeX with low knowledge of LaTeXing.
+You can write your papers in the python script and make them ready to be compiled in the various compilers of LaTeX.
 PyTeX  
 ======
 You can write sections, subsections, subsubsections,
-and other additional items and tags in your ordinary content files.
-(this property needs a base knowledge about LaTeX)
+and other additional items and tags in your ordinary content files. (this property needs a base knowledge about LaTeX)
 
 Usage
 -------
 
-   >>>  article = pytex.document() # Create a document object | You can also set paper options here
-   >>>  article.content('Introduction to PyTeX', # Topic title
-   ...                            'Paul Jeff', # Name of author
-   ...                            'paul.jeff@gmail.com +123456789', # Contact details
-   ...                            'my_abs.txt', # Abstraction file
+   >>>  article = pytex.document()
+   >>>  article.content('Introduction to PyTeX',
+   ...                            'Paul Jeff',
+   ...                            'paul.jeff@gmail.com +123456789',
+   ...                            'my_abs.txt',
    ...                            {
-   ...                              'Introduction':'intro.txt', # {'Section name':'Content File'}
+   ...                              'Introduction':'intro.txt',
    ...                              'Start with Numpy':'start.txt',
    ...                              'Installation':'install.txt'
    ...                            })
-   >>>  article.release() # Release tex file
-   >>>  article.compile() # Compile tex file
+   >>>  article.release()
 
 Methods & Parameters
 --------------------------
 
 `document.content` includes a bunch of parameters. It has some default values.
-`document.compile` makes your file ready to be compiled.
 
 `document.__init__` sets vital vars of your paper properties which is `option` in LaTeX.
-`document.release` writes the tex file.
+`document.release` executes the tex file.
 
-PyTeX has been released from PyPi and licensed by `GPL-3`
-
-Repo ~> <https://github.com/lnxpy/pytex>
-------------------------------
-Gist ~> <https://gist.github.com/lnxpy/29234003d256ae9da4286a442753331c>
-------------------------------
-
-Made with 💙 on 2019 by Alireza Yahyapour
+PyTeX has been released from PyPi and licensed by `MIT on 2020`.
+Made with love on 2019 and maintaned on 2020 by Ali Reza Yahyapour(lnxpy).
 """
-
-from os import system as sys
-# using platform.system to get the OS
-from platform import system
 
 __all__ = [
     '__init__',
     'release',
     'content',
-    'compile'
 ]
 __author__ = [
-    'Alireza Yahyapour',
+    'Ali Reza Yahyapour',
     'http://lnxpy.unaux.com',
-    'https://github.com/lnxpy'
+    'https://github.com/lnxpy',
 ]
 __publish__ = [
-    'Sep 2019'
+    'Sep 2019',
 ]
 __license__= [
-    'https://######'
+    'MIT License Copyright (c) 2019 Ali Reza Yahyapour',
+    'https://github.com/lnxpy/PyTeX/blob/master/LICENSE.txt',
 ]
 
 class LaTeX:
@@ -76,7 +63,6 @@ class LaTeX:
         self.type = type
     def release(self, content={}):
         content.clear()
-        # create content var to explain properties like LaTeX syntax
         content = {
             'option': ', '.join([self.size,self.paper,self.column,self.side]),
             'class': self.type,
@@ -94,14 +80,18 @@ class LaTeX:
             '^title^':content['content']['title'],
             '^author^':content['content']['author']
         }
-        # rewrite using temp.tex
-        with open('temp.tex','r') as tempfile:
-            for line in tempfile.readlines():
-                for element in const:
-                    if element in line:
-                        line = line.replace(element,const[element])
-                lastrel.write(line)
-            lastrel.write('\n')
+        template = [
+            '\documentclass[^option^]{^class^}',
+            '\begin{document}',
+            '\title{^title^}\maketitle',
+            '\author{\centering{\textbf{^author^}\par}}',
+            '\begin{abstract}']
+        for line in template:
+            for element in const:
+                if element in line:
+                    line = line.replace(element,const[element])
+            lastrel.write(line)
+        lastrel.write('\n')
         lastrel.write(content['content']['abstract']+'\n')
         lastrel.write('\\end{abstract}'+'\n')
         for i in content['content']['substance'].keys():
@@ -117,9 +107,3 @@ class document(LaTeX):
         self.author = '%s\t\\texttt{%s}'%(author, email)
         self.abstraction = abstraction
         self.substance = substance
-    # compile operation
-    def compile(self):
-        if system() == 'Windows':
-            pass
-        elif system() == 'Linux':
-            pass
